@@ -1,0 +1,2 @@
+# Principal-Component-Analysis-PCA-and-it-s-impact-on-image-reconstruction-quality
+This project highlights effectiveness of PCA in reducing image data dimensionality and its impact on image reconstruction quality. It will provide insights into the balance between compression efficiency and reconstruction accuracy, demonstrating PCA's practical applications in image processing and data compression.
