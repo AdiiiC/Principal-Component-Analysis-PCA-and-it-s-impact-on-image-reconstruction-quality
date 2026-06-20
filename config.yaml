@@ -1,0 +1,95 @@
+# PCA Image Reconstruction Configuration
+# ========================================
+
+dataset:
+  name: "olivetti"  # olivetti, custom, lfw
+  custom_path: null
+  target_size: [64, 64]
+  shuffle: true
+  random_state: 42
+
+pca:
+  n_components: 40
+  method: "sklearn"  # sklearn or manual
+  
+  # Component sweep for analysis
+  sweep_range:
+    start: 1
+    stop: 100
+    step: 5
+
+  # Variance thresholds to highlight
+  variance_thresholds: [0.90, 0.95, 0.99]
+
+incremental_pca:
+  n_components: 40
+  batch_size: 50
+
+kernel_pca:
+  n_components: 40
+  kernel: "rbf"
+  gamma: null  # auto-computed if null
+
+sparse_pca:
+  n_components: 20
+  alpha: 1.0
+
+probabilistic_pca:
+  n_components: 40
+
+robust_pca:
+  max_iter: 100
+  tol: 1.0e-7
+  lambda: null  # auto-computed if null
+
+pca_2d:
+  n_components: 20
+
+visualization:
+  n_display_faces: 5
+  n_eigenfaces: 16
+  colormap: "gray"
+  figure_dpi: 150
+  save_plots: true
+  output_dir: "outputs"
+
+animation:
+  components_sequence: [1, 2, 3, 5, 8, 10, 15, 20, 30, 40, 50, 75, 100]
+  fps: 2
+  output_format: "gif"  # gif or mp4
+
+denoising:
+  noise_types: ["gaussian", "salt_pepper", "occlusion"]
+  noise_levels: [0.05, 0.1, 0.15, 0.2, 0.3, 0.4, 0.5]
+
+compression:
+  bits_per_coefficient: [4, 6, 8, 12, 16]
+  jpeg_qualities: [5, 10, 20, 30, 50, 70, 90]
+
+face_recognition:
+  classifier: "svm"  # svm, knn, logistic
+  test_size: 0.3
+  components_range:
+    start: 5
+    stop: 100
+    step: 5
+
+anomaly_detection:
+  contamination: 0.1
+  threshold_percentile: 95
+
+information_theory:
+  n_bins_entropy: 50
+  n_bins_mi: 20
+
+perceptual:
+  use_vgg: true
+  device: "cpu"  # cpu or cuda
+
+api:
+  host: "0.0.0.0"
+  port: 8000
+
+streamlit:
+  page_title: "PCA Image Reconstruction Explorer"
+  layout: "wide"

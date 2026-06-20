@@ -1,0 +1,124 @@
+========================================================
+  PCA Image Reconstruction & Explainability Suite
+  Steps to Run the Code
+========================================================
+
+PREREQUISITES
+-------------
+1. Python 3.9+ installed
+2. pip (Python package manager)
+
+
+STEP 1: Install Dependencies
+-----------------------------
+Open a terminal in the project folder and run:
+
+    pip install -r requirements.txt
+
+This installs: numpy, scikit-learn, scikit-image, matplotlib, pandas,
+Pillow, PyYAML, imageio, torch, torchvision, streamlit, fastapi, uvicorn, pytest
+
+
+STEP 2: Run All Experiments (Recommended)
+------------------------------------------
+    python run_all.py
+
+This runs all 13 experiments and saves outputs (plots, CSVs, GIF) to the outputs/ folder.
+Takes approximately 3-5 minutes depending on hardware.
+
+
+STEP 3: Run a Specific Experiment
+-----------------------------------
+    python run_all.py --experiment <name>
+
+Available experiments:
+    basic          - Basic reconstruction + eigenfaces + scree plot + scatter
+    sweep          - Component sweep (MSE, PSNR, SSIM vs num_components)
+    denoising      - PCA as a denoiser (Gaussian, salt & pepper, occlusion)
+    recognition    - Face recognition accuracy vs components
+    anomaly        - Anomaly detection via reconstruction error
+    compression    - PCA vs JPEG at matched compression ratios
+    info_theory    - Entropy & mutual information per component
+    methods        - Comparison of all PCA variants (7 methods)
+    arithmetic     - Face interpolation, averaging, outlier synthesis
+    incremental    - Incremental/streaming PCA convergence
+    animation      - Progressive reconstruction animated GIF
+    sparse         - Sparse vs Dense component interpretability
+    probabilistic  - Probabilistic PCA + uncertainty maps
+
+Example:
+    python run_all.py --experiment denoising
+
+
+STEP 4: Launch Interactive Streamlit App
+-----------------------------------------
+    streamlit run streamlit_app.py
+
+Opens a web browser at http://localhost:8501 with pages for:
+    - Interactive reconstruction (slider for k)
+    - Eigenfaces gallery
+    - Component sweep analysis
+    - Denoising demo
+    - Face arithmetic (interpolation)
+    - Anomaly detection
+    - Method comparison
+    - Upload your own image
+
+
+STEP 5: Launch REST API Server
+-------------------------------
+    uvicorn api_server:app --reload --port 8000
+
+API documentation available at: http://localhost:8000/docs
+
+Endpoints:
+    POST /reconstruct   - Upload image, get PCA reconstruction + metrics
+    POST /denoise       - Upload image, add noise, denoise via PCA
+    GET  /eigenfaces    - Get eigenfaces as base64 images
+    GET  /metrics       - Metrics sweep across component counts
+    GET  /sample/{id}   - Get dataset sample + reconstruction
+
+
+STEP 6: Run Unit Tests
+-----------------------
+    pytest
+
+Runs 26 tests covering: PCA engines, metrics, data loaders, experiments.
+
+
+STEP 7: Run Original Legacy Scripts (Optional)
+------------------------------------------------
+The original standalone scripts are preserved in the legacy/ folder:
+
+    python legacy/01_basic_reconstruction.py      - Basic PCA reconstruction (40 PCs)
+    python legacy/02_psnr_evaluation.py           - PSNR calculation (50 PCs)
+    python legacy/03_psnr_vs_components.py        - PSNR vs num_components plot
+    python legacy/04_psnr_table.py                - PSNR results as table
+    python legacy/05_mse_vs_components.py         - MSE vs num_components plot
+    python legacy/06_specific_pc_reconstruction.py - Reconstruction using PC5 & PC6
+    python legacy/07_pc_scatter_plot.py           - Scatter plot on PC5 & PC6
+
+
+PROJECT STRUCTURE
+-----------------
+    pca_core/          - Core module (PCA engines, metrics, data loading)
+    experiments/       - All experiment implementations
+    visualizations/    - Plotting and animation functions
+    tests/             - Unit tests
+    outputs/           - Generated plots, CSVs, and animations
+    legacy/            - Original standalone scripts (for reference)
+    run_all.py         - Unified CLI entry point
+    streamlit_app.py   - Interactive web app
+    api_server.py      - REST API server
+    config.yaml        - All configuration parameters
+
+
+CONFIGURATION
+--------------
+Edit config.yaml to change:
+    - Number of PCA components
+    - Noise types and levels
+    - Sweep ranges
+    - Animation FPS and format
+    - API port
+    - Output directory
