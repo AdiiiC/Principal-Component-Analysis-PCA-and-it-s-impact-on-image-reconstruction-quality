@@ -4,7 +4,16 @@ PCA Image Reconstruction Core Module
 Reusable PCA functionality for image compression, reconstruction, and analysis.
 """
 
-from .data_loader import load_olivetti, load_custom_images, add_noise
+from .data_loader import (
+    load_olivetti,
+    load_custom_images,
+    load_lfw,
+    load_digits_dataset,
+    load_dataset,
+    add_noise,
+    prefilter_noisy,
+    IMAGE_DATASETS,
+)
 from .pca_engine import (
     PCAEngine,
     IncrementalPCAEngine,
@@ -20,7 +29,12 @@ from .utils import save_figure, ensure_dir, get_compression_ratio
 __all__ = [
     "load_olivetti",
     "load_custom_images",
+    "load_lfw",
+    "load_digits_dataset",
+    "load_dataset",
     "add_noise",
+    "prefilter_noisy",
+    "IMAGE_DATASETS",
     "PCAEngine",
     "IncrementalPCAEngine",
     "KernelPCAEngine",

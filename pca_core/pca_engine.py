@@ -15,15 +15,38 @@ class PCAEngine:
     sklearn-backed implementation (for production use).
     """
 
-    def __init__(self, n_components: int = 40, method: str = "sklearn"):
+    def __init__(
+        self,
+        n_components: int = 40,
+        method: str = "sklearn",
+        scaling: str = "center",
+    ):
         """
         Args:
             n_components: Number of principal components to retain
             method: 'manual' for eigendecomposition, 'sklearn' for SVD-based
+            scaling: Preprocessing applied before PCA:
+                - 'center'   : subtract the per-pixel mean only (default). This makes
+                               PCA the MSE-optimal rank-k linear reconstruction
+                               (Eckart-Young), giving the best PSNR/MSE for a given k.
+                - 'standard' : subtract mean and divide by per-pixel std (whitening
+                               of inputs). Kept for backward compatibility; tends to
+                               waste components on low-variance pixels.
+                - 'none'     : no centering or scaling.
         """
         self.n_components = n_components
         self.method = method
-        self.scaler = StandardScaler()
+        self.scaling = scaling
+        if scaling == "standard":
+            self.scaler = StandardScaler()
+        elif scaling == "center":
+            self.scaler = StandardScaler(with_mean=True, with_std=False)
+        elif scaling == "none":
+            self.scaler = StandardScaler(with_mean=False, with_std=False)
+        else:
+            raise ValueError(
+                f"Unknown scaling '{scaling}'. Use 'center', 'standard', or 'none'."
+            )
         self.components_ = None
         self.mean_ = None
         self.explained_variance_ = None
@@ -39,7 +62,18 @@ class PCAEngine:
         if self.method == "sklearn":
             from sklearn.decomposition import PCA
 
-            self._sklearn_pca = PCA(n_components=self.n_components, random_state=42)
+            # svd_solver="auto" silently switches to *randomized* (approximate)
+            # SVD for wide matrices like flattened images, so the recovered
+            # components - and therefore the reconstruction - are not quite the
+            # true top-k subspace. "full" performs an exact SVD, giving the
+            # provably MSE-optimal rank-k reconstruction (Eckart-Young) and the
+            # best achievable PSNR/SSIM for a given k. These datasets are small
+            # enough that the exact solve stays fast.
+            self._sklearn_pca = PCA(
+                n_components=self.n_components,
+                svd_solver="full",
+                random_state=42,
+            )
             self._sklearn_pca.fit(X_scaled)
             self.components_ = self._sklearn_pca.components_
             self.explained_variance_ = self._sklearn_pca.explained_variance_
