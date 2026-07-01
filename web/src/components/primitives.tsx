@@ -21,8 +21,8 @@ export function Slider({
   return (
     <div className="w-full">
       <div className="mb-2 flex items-center justify-between">
-        <span className="text-sm font-medium text-slate-300">{label}</span>
-        <span className="rounded-lg bg-white/5 px-2 py-0.5 font-mono text-sm text-accent-cyan">
+        <span className="text-sm font-medium text-paper-300">{label}</span>
+        <span className="rounded-sm bg-ink-900 px-2 py-0.5 font-mono text-sm text-accent">
           {value}
           {suffix ?? ''}
         </span>
@@ -49,21 +49,21 @@ export function Segmented<T extends string>({
   onChange: (v: T) => void
 }) {
   return (
-    <div className="inline-flex rounded-xl border border-white/10 bg-white/5 p-1">
+    <div className="inline-flex rounded-md border border-line bg-ink-900 p-1">
       {options.map((opt) => {
         const active = opt.value === value
         return (
           <button
             key={opt.value}
             onClick={() => onChange(opt.value)}
-            className={`relative rounded-lg px-3.5 py-1.5 text-sm font-medium transition-colors ${
-              active ? 'text-white' : 'text-slate-400 hover:text-slate-200'
+            className={`relative rounded-sm px-3.5 py-1.5 text-sm font-medium transition-colors ${
+              active ? 'text-ink-950' : 'text-paper-400 hover:text-paper-100'
             }`}
           >
             {active && (
               <motion.span
                 layoutId="segmented-active"
-                className="absolute inset-0 rounded-lg bg-gradient-to-r from-accent-indigo to-accent-violet"
+                className="absolute inset-0 rounded-sm bg-accent"
                 transition={{ type: 'spring', stiffness: 400, damping: 32 }}
               />
             )}
@@ -88,27 +88,20 @@ export function StatCard({
   accent?: 'violet' | 'cyan' | 'pink' | 'emerald'
   hint?: string
 }) {
-  const ring: Record<string, string> = {
-    violet: 'from-accent-violet/20 to-transparent',
-    cyan: 'from-accent-cyan/20 to-transparent',
-    pink: 'from-accent-pink/20 to-transparent',
-    emerald: 'from-emerald-400/20 to-transparent',
-  }
   const text: Record<string, string> = {
-    violet: 'text-accent-violet',
+    violet: 'text-accent',
     cyan: 'text-accent-cyan',
     pink: 'text-accent-pink',
-    emerald: 'text-emerald-400',
+    emerald: 'text-accent-sage',
   }
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-      <div className={`pointer-events-none absolute -right-6 -top-6 h-24 w-24 rounded-full bg-gradient-to-br ${ring[accent]} blur-2xl`} />
-      <p className="text-xs font-medium uppercase tracking-wider text-slate-400">{label}</p>
-      <p className="mt-1 font-mono text-2xl font-semibold text-white">
+    <div className="rounded-md border border-line bg-ink-900 p-4">
+      <p className="text-xs font-medium uppercase tracking-wider text-paper-500">{label}</p>
+      <p className="mt-1 font-mono text-2xl font-semibold text-paper-100">
         {value}
         {unit && <span className={`ml-1 text-sm ${text[accent]}`}>{unit}</span>}
       </p>
-      {hint && <p className="mt-0.5 text-xs text-slate-500">{hint}</p>}
+      {hint && <p className="mt-0.5 text-xs text-paper-500">{hint}</p>}
     </div>
   )
 }
@@ -134,17 +127,21 @@ export function SectionHeading({
 }) {
   return (
     <div className="mb-8 max-w-2xl">
-      <span className="pill mb-3">{eyebrow}</span>
-      <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">{title}</h2>
-      {description && <p className="mt-3 text-slate-400">{description}</p>}
+      <span className="tag mb-3">{eyebrow}</span>
+      <h2 className="text-3xl font-bold tracking-tight text-paper-100 sm:text-4xl">{title}</h2>
+      {description && <p className="mt-3 text-paper-400">{description}</p>}
     </div>
   )
 }
 
+export function Skeleton({ className = '' }: { className?: string }) {
+  return <div className={`animate-pulse rounded-md bg-ink-700 ${className}`} />
+}
+
 export function Spinner({ label }: { label?: string }) {
   return (
-    <div className="flex flex-col items-center justify-center gap-3 py-10 text-slate-400">
-      <div className="h-9 w-9 animate-spin rounded-full border-2 border-white/10 border-t-accent-violet" />
+    <div className="flex flex-col items-center justify-center gap-3 py-10 text-paper-400">
+      <div className="h-8 w-8 animate-spin rounded-full border-2 border-line-strong border-t-accent" />
       {label && <p className="text-sm">{label}</p>}
     </div>
   )
@@ -152,7 +149,7 @@ export function Spinner({ label }: { label?: string }) {
 
 export function ErrorNote({ message }: { message: string }) {
   return (
-    <div className="rounded-xl border border-rose-500/30 bg-rose-500/10 p-4 text-sm text-rose-200">
+    <div className="rounded-md border border-rose-400/30 bg-rose-500/10 p-4 text-sm text-rose-200">
       <p className="font-semibold">Something went wrong</p>
       <p className="mt-1 text-rose-300/80">{message}</p>
       <p className="mt-2 text-xs text-rose-300/60">

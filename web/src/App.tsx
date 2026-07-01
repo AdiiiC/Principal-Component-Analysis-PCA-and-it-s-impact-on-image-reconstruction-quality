@@ -99,12 +99,12 @@ export default function App() {
                 <div className="mx-auto max-w-md px-4 py-24 text-center">
                   {online === false ? (
                     <div className="card p-8">
-                      <h2 className="text-xl font-semibold text-white">API not reachable</h2>
-                      <p className="mt-2 text-sm text-slate-400">Start the backend, then reload:</p>
-                      <pre className="mt-4 overflow-x-auto rounded-xl bg-black/50 p-3 text-left font-mono text-xs text-accent-cyan">
+                      <h2 className="text-xl font-semibold text-paper-100">API not reachable</h2>
+                      <p className="mt-2 text-sm text-paper-400">Start the backend, then reload:</p>
+                      <pre className="mt-4 overflow-x-auto rounded-md bg-ink-950 p-3 text-left font-mono text-xs text-accent">
 uvicorn api_server:app --reload --port 8000
                       </pre>
-                      {bootError && <p className="mt-3 text-xs text-rose-400/70">{bootError}</p>}
+                      {bootError && <p className="mt-3 text-xs text-rose-300/70">{bootError}</p>}
                     </div>
                   ) : (
                     <Spinner label="Loading dataset…" />
@@ -115,10 +115,10 @@ uvicorn api_server:app --reload --port 8000
         </AnimatePresence>
       </main>
 
-      <footer className="border-t border-white/10 py-8">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 text-sm text-slate-500 sm:flex-row sm:px-6">
+      <footer className="border-t border-line py-8">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 text-sm text-paper-500 sm:flex-row sm:px-6">
           <p>
-            <span className="font-semibold text-slate-300">Eigenlab</span> · PCA image reconstruction
+            <span className="font-semibold text-paper-300">Eigenlab</span> · PCA image reconstruction
             explorer
           </p>
           <p>

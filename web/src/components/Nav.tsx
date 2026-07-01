@@ -29,22 +29,22 @@ export function Nav({
   online: boolean | null
 }) {
   return (
-    <header className="sticky top-0 z-40 border-b border-white/10 bg-ink-950/70 backdrop-blur-xl">
+    <header className="sticky top-0 z-40 border-b border-line bg-ink-950/90 backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
         <button
           onClick={() => setView('overview')}
           className="flex items-center gap-2.5 text-left"
         >
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-accent-indigo to-accent-violet shadow-glow">
+          <span className="flex h-9 w-9 items-center justify-center rounded-md border border-line-strong bg-ink-800 text-accent">
             <Boxes size={18} />
           </span>
           <span className="hidden sm:block">
-            <span className="block text-sm font-bold leading-tight text-white">Eigenlab</span>
-            <span className="block text-[11px] leading-tight text-slate-400">PCA Reconstruction</span>
+            <span className="block text-sm font-bold leading-tight text-paper-100">Eigenlab</span>
+            <span className="block text-[11px] leading-tight text-paper-400">PCA Reconstruction</span>
           </span>
         </button>
 
-        <nav className="flex items-center gap-1 overflow-x-auto rounded-2xl border border-white/10 bg-white/5 p-1">
+        <nav className="flex items-center gap-1 overflow-x-auto rounded-md border border-line bg-ink-900 p-1">
           {NAV_ITEMS.map((item) => {
             const active = item.id === view
             const Icon = item.icon
@@ -52,14 +52,14 @@ export function Nav({
               <button
                 key={item.id}
                 onClick={() => setView(item.id)}
-                className={`relative flex items-center gap-1.5 whitespace-nowrap rounded-xl px-3 py-2 text-sm font-medium transition-colors ${
-                  active ? 'text-white' : 'text-slate-400 hover:text-slate-200'
+                className={`relative flex items-center gap-1.5 whitespace-nowrap rounded-sm px-3 py-2 text-sm font-medium transition-colors ${
+                  active ? 'text-ink-950' : 'text-paper-400 hover:text-paper-100'
                 }`}
               >
                 {active && (
                   <motion.span
                     layoutId="nav-active"
-                    className="absolute inset-0 rounded-xl bg-gradient-to-r from-accent-indigo/80 to-accent-violet/80"
+                    className="absolute inset-0 rounded-sm bg-accent"
                     transition={{ type: 'spring', stiffness: 400, damping: 32 }}
                   />
                 )}
@@ -74,11 +74,11 @@ export function Nav({
 
         <div className="hidden items-center gap-2 lg:flex">
           <span
-            className={`h-2 w-2 rounded-full ${
-              online === null ? 'bg-slate-500' : online ? 'bg-emerald-400 shadow-[0_0_10px_#34d399]' : 'bg-rose-500'
+            className={`h-1.5 w-1.5 rounded-full ${
+              online === null ? 'bg-paper-600' : online ? 'bg-accent-sage' : 'bg-rose-400'
             }`}
           />
-          <span className="text-xs text-slate-400">
+          <span className="text-xs text-paper-400">
             {online === null ? 'Connecting' : online ? 'API online' : 'API offline'}
           </span>
         </div>

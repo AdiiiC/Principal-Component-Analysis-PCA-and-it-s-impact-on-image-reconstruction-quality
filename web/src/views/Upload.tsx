@@ -78,20 +78,20 @@ export function Upload({ info }: { info: DatasetInfo }) {
                 setDragOver(false)
                 onSelect(e.dataTransfer.files?.[0])
               }}
-              className={`flex cursor-pointer flex-col items-center justify-center gap-3 rounded-2xl border-2 border-dashed p-8 text-center transition-colors ${
+              className={`flex cursor-pointer flex-col items-center justify-center gap-3 rounded-md border border-dashed p-8 text-center transition-colors ${
                 dragOver
-                  ? 'border-accent-violet bg-accent-violet/10'
-                  : 'border-white/15 bg-white/[0.02] hover:border-white/30'
+                  ? 'border-accent bg-accent/10'
+                  : 'border-line-strong bg-ink-900 hover:border-paper-600'
               }`}
             >
-              <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-accent-indigo to-accent-violet shadow-glow">
-                <ImagePlus size={22} />
+              <span className="flex h-11 w-11 items-center justify-center rounded-md border border-line-strong bg-ink-800 text-accent">
+                <ImagePlus size={20} />
               </span>
               <div>
-                <p className="text-sm font-medium text-slate-200">
+                <p className="text-sm font-medium text-paper-200">
                   {file ? file.name : 'Drop an image or click to browse'}
                 </p>
-                <p className="mt-0.5 text-xs text-slate-500">JPG, PNG or BMP</p>
+                <p className="mt-0.5 text-xs text-paper-500">JPG, PNG or BMP</p>
               </div>
               <input
                 ref={inputRef}
@@ -121,12 +121,12 @@ export function Upload({ info }: { info: DatasetInfo }) {
           {error ? (
             <ErrorNote message={error} />
           ) : !file ? (
-            <div className="flex h-full min-h-[300px] flex-col items-center justify-center gap-3 text-center text-slate-500">
+            <div className="flex h-full min-h-[300px] flex-col items-center justify-center gap-3 text-center text-paper-500">
               <ImagePlus size={40} className="opacity-40" />
               <p>Upload an image to see its PCA reconstruction.</p>
             </div>
           ) : loading && !result ? (
-            <div className="flex min-h-[300px] items-center justify-center gap-3 text-slate-400">
+            <div className="flex min-h-[300px] items-center justify-center gap-3 text-paper-400">
               <Loader2 size={22} className="animate-spin" /> Reconstructing…
             </div>
           ) : result ? (

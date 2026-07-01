@@ -14,87 +14,87 @@ body,
 
 body {
   margin: 0;
-  background-color: #05060f;
-  color: #e5e7f0;
-  font-family: 'Inter', system-ui, sans-serif;
+  background-color: #12110e;
+  color: #ece7dc;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
 }
 
-/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #0a0c1b;
+  background: #12110e;
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(#6366f1, #8b5cf6);
-  border-radius: 999px;
-  border: 2px solid #0a0c1b;
+  background: #2a261e;
+  border-radius: 0;
+  border: 2px solid #12110e;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #373227;
 }
 
 @layer components {
-  .glass {
-    @apply bg-white/[0.04] backdrop-blur-xl border border-white/10;
+  .surface {
+    @apply bg-ink-800 border border-line;
   }
-  .glass-strong {
-    @apply bg-white/[0.06] backdrop-blur-2xl border border-white/10;
+  .surface-raised {
+    @apply bg-ink-700 border border-line;
   }
   .card {
-    @apply glass rounded-2xl shadow-2xl shadow-black/40;
+    @apply bg-ink-800 border border-line rounded-lg shadow-panel;
   }
-  .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-accent-cyan via-accent-violet to-accent-pink;
+  .accent-text {
+    @apply text-accent-strong;
   }
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed;
+    @apply inline-flex items-center justify-center gap-2 rounded-md px-4 py-2.5 text-sm font-medium transition-colors duration-150 disabled:opacity-40 disabled:cursor-not-allowed;
   }
   .btn-primary {
-    @apply btn bg-gradient-to-r from-accent-indigo to-accent-violet text-white shadow-glow hover:shadow-[0_0_50px_-8px_rgba(139,92,246,0.7)] hover:-translate-y-0.5;
+    @apply btn bg-accent text-ink-950 font-semibold hover:bg-accent-strong;
   }
   .btn-ghost {
-    @apply btn glass text-slate-200 hover:bg-white/10;
+    @apply btn bg-ink-700 border border-line text-paper-300 hover:border-line-strong hover:text-paper-100;
   }
-  .pill {
-    @apply inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-slate-300;
+  .tag {
+    @apply inline-flex items-center gap-1.5 rounded-sm border border-line bg-ink-900 px-2.5 py-1 text-xs font-medium text-paper-400;
   }
 }
 
-/* Range slider styling */
 input[type='range'] {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
-  height: 6px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.1);
+  height: 4px;
+  border-radius: 0;
+  background: #2a261e;
   outline: none;
 }
 input[type='range']::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #22d3ee, #8b5cf6);
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  background: #cf9b52;
   cursor: pointer;
-  box-shadow: 0 0 14px rgba(139, 92, 246, 0.7);
-  border: 2px solid #0a0c1b;
-  transition: transform 0.12s ease;
+  border: none;
+  transition: background 0.12s ease;
 }
 input[type='range']::-webkit-slider-thumb:hover {
-  transform: scale(1.15);
+  background: #e0b06a;
 }
 input[type='range']::-moz-range-thumb {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #22d3ee, #8b5cf6);
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  background: #cf9b52;
   cursor: pointer;
-  border: 2px solid #0a0c1b;
+  border: none;
 }
 
 .pixelated {
@@ -104,7 +104,7 @@ input[type='range']::-moz-range-thumb {
 
 .grid-bg {
   background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-  background-size: 44px 44px;
+    linear-gradient(to right, rgba(233, 225, 206, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(233, 225, 206, 0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
 }

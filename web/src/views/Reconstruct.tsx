@@ -107,8 +107,8 @@ export function Reconstruct({ info }: { info: DatasetInfo }) {
                 />
               </div>
 
-              <div className="flex flex-col items-center gap-3 border-t border-white/10 pt-8">
-                <p className="text-sm font-medium text-slate-300">Drag to compare</p>
+              <div className="flex flex-col items-center gap-3 border-t border-line pt-8">
+                <p className="text-sm font-medium text-paper-300">Drag to compare</p>
                 <CompareSlider
                   beforeSrc={pngSrc(data.original_image)}
                   afterSrc={pngSrc(data.reconstructed_image)}

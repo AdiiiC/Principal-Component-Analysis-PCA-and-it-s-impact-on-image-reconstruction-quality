@@ -13,22 +13,22 @@ export function ImageFrame({
   glow?: 'violet' | 'cyan' | 'pink' | 'none'
 }) {
   const ring: Record<string, string> = {
-    violet: 'shadow-glow',
-    cyan: 'shadow-glow-cyan',
-    pink: 'shadow-[0_0_40px_-12px_rgba(236,72,153,0.5)]',
-    none: '',
+    violet: 'border-accent/40',
+    cyan: 'border-accent-cyan/40',
+    pink: 'border-accent-pink/40',
+    none: 'border-line',
   }
   return (
     <div className="flex flex-col items-center gap-2">
-      <div className={`relative overflow-hidden rounded-2xl border border-white/10 bg-black/40 ${ring[glow]}`}>
+      <div className={`relative overflow-hidden rounded-md border bg-ink-950 ${ring[glow]}`}>
         <img src={src} alt={caption ?? 'image'} className="pixelated h-44 w-44 object-cover sm:h-52 sm:w-52" />
         {badge && (
-          <span className="absolute left-2 top-2 rounded-md bg-black/60 px-2 py-0.5 font-mono text-[11px] text-accent-cyan backdrop-blur">
+          <span className="absolute left-2 top-2 rounded-sm bg-ink-950/80 px-2 py-0.5 font-mono text-[11px] text-accent-cyan">
             {badge}
           </span>
         )}
       </div>
-      {caption && <span className="text-sm font-medium text-slate-400">{caption}</span>}
+      {caption && <span className="text-sm font-medium text-paper-400">{caption}</span>}
     </div>
   )
 }
@@ -105,13 +105,13 @@ export function ErrorMap({
 
   return (
     <div className="flex flex-col items-center gap-2">
-      <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-black/40 shadow-[0_0_40px_-12px_rgba(236,72,153,0.5)]">
+      <div className="relative overflow-hidden rounded-md border border-accent-pink/40 bg-ink-950">
         <canvas ref={canvasRef} className="pixelated h-44 w-44 sm:h-52 sm:w-52" />
-        <span className="absolute bottom-2 right-2 rounded-md bg-black/60 px-2 py-0.5 font-mono text-[11px] text-accent-pink backdrop-blur">
+        <span className="absolute bottom-2 right-2 rounded-sm bg-ink-950/80 px-2 py-0.5 font-mono text-[11px] text-accent-pink">
           max {(maxErr * 100).toFixed(1)}%
         </span>
       </div>
-      {caption && <span className="text-sm font-medium text-slate-400">{caption}</span>}
+      {caption && <span className="text-sm font-medium text-paper-400">{caption}</span>}
     </div>
   )
 }
@@ -168,7 +168,7 @@ export function CompareSlider({
   return (
     <div
       ref={containerRef}
-      className="relative aspect-square w-full max-w-sm select-none overflow-hidden rounded-2xl border border-white/10 bg-black/40 shadow-glow"
+      className="relative aspect-square w-full max-w-sm select-none overflow-hidden rounded-md border border-line bg-ink-950"
       onMouseDown={(e) => {
         dragging.current = true
         move(e.clientX)
@@ -187,15 +187,15 @@ export function CompareSlider({
           style={{ width: containerRef.current?.clientWidth ?? '100%' }}
         />
       </div>
-      <span className="absolute left-2 top-2 rounded-md bg-black/60 px-2 py-0.5 text-[11px] text-slate-200 backdrop-blur">
+      <span className="absolute left-2 top-2 rounded-sm bg-ink-950/80 px-2 py-0.5 text-[11px] text-paper-200">
         {beforeLabel}
       </span>
-      <span className="absolute right-2 top-2 rounded-md bg-black/60 px-2 py-0.5 text-[11px] text-slate-200 backdrop-blur">
+      <span className="absolute right-2 top-2 rounded-sm bg-ink-950/80 px-2 py-0.5 text-[11px] text-paper-200">
         {afterLabel}
       </span>
-      <div className="absolute inset-y-0 w-0.5 bg-white/80" style={{ left: `${pos}%` }}>
-        <div className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/30 bg-gradient-to-br from-accent-cyan to-accent-violet p-2 shadow-glow">
-          <div className="h-3 w-3 rounded-full bg-white" />
+      <div className="absolute inset-y-0 w-0.5 bg-accent" style={{ left: `${pos}%` }}>
+        <div className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-sm border border-ink-950 bg-accent p-1.5">
+          <div className="h-2.5 w-2.5 rounded-sm bg-ink-950" />
         </div>
       </div>
     </div>

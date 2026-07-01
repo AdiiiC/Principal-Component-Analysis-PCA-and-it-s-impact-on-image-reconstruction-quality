@@ -17,9 +17,9 @@ export function DatasetSwitcher({
   onChange: (id: string) => void
 }) {
   return (
-    <div className="sticky top-[57px] z-30 border-b border-white/10 bg-ink-950/60 backdrop-blur-xl">
+    <div className="sticky top-[57px] z-30 border-b border-line bg-ink-950/85 backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-3 px-4 py-2.5 sm:px-6">
-        <span className="flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-slate-400">
+        <span className="flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-paper-400">
           <Database size={14} /> Dataset
         </span>
         <div className="flex flex-wrap items-center gap-1.5">
@@ -31,14 +31,14 @@ export function DatasetSwitcher({
                 key={d.id}
                 onClick={() => onChange(d.id)}
                 title={d.description}
-                className={`relative flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${
-                  active ? 'text-white' : 'text-slate-400 hover:text-slate-200'
+                className={`relative flex items-center gap-1.5 rounded-sm px-3 py-1.5 text-sm font-medium transition-colors ${
+                  active ? 'text-ink-950' : 'text-paper-400 hover:text-paper-100'
                 }`}
               >
                 {active && (
                   <motion.span
                     layoutId="dataset-active"
-                    className="absolute inset-0 rounded-lg border border-accent-violet/40 bg-gradient-to-r from-accent-indigo/30 to-accent-violet/30"
+                    className="absolute inset-0 rounded-sm bg-accent"
                     transition={{ type: 'spring', stiffness: 400, damping: 32 }}
                   />
                 )}

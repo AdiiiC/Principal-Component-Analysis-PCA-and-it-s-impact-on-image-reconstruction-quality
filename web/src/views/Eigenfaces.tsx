@@ -74,15 +74,15 @@ export function Eigenfaces({ info }: { info: DatasetInfo }) {
                   transition={{ delay: Math.min(i * 0.015, 0.4), duration: 0.3 }}
                   className="group relative"
                 >
-                  <div className="overflow-hidden rounded-xl border border-white/10 bg-black/40 p-0.5 transition-shadow group-hover:shadow-glow">
+                  <div className="overflow-hidden rounded-md border border-line bg-ink-950 p-0.5 transition-colors group-hover:border-line-strong">
                     <img
                       src={pngSrc(ef.image)}
                       alt={`PC ${ef.component}`}
-                      className="pixelated aspect-square w-full rounded-[10px] object-cover"
+                      className="pixelated aspect-square w-full rounded-sm object-cover"
                     />
                   </div>
                   <div className="mt-1.5 flex items-center justify-between px-0.5">
-                    <span className="font-mono text-[11px] text-slate-400">PC{ef.component}</span>
+                    <span className="font-mono text-[11px] text-paper-400">PC{ef.component}</span>
                     <span className="font-mono text-[11px] text-accent-cyan">
                       {(ef.explained_variance_ratio * 100).toFixed(1)}%
                     </span>
